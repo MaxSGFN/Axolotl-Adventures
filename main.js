@@ -34,11 +34,8 @@ const config = {
     parent: "game",
     backgroundColor: "#20232a",
     scene: {
-        preload(){
-            this.load.image("ax", "sprites/axolotl.png");
-            this.load.image("wall", "sprites/wall.png");
-            this.load.image("goal", "sprites/goal.png");
-        },
+        key: "default",
+        preload(){},
         create(){
             Game.init(this);     // Game Engine Start
         },
@@ -49,6 +46,7 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+globalThis.phaserGame = game
 
 // =====================
 //  Monaco + Pyodide
@@ -109,7 +107,8 @@ log(ax.position())`,
             { label: "ax.position", insertText: "ax.position()", documentation: "Gibt die Position zurück." },
             { label: "ax.position_x", insertText: "ax.position_x()", documentation: "Gibt die x-Position zurück." },
             { label: "ax.position_y", insertText: "ax.position_y()", documentation: "Gibt die y-Position zurück." },
-            { label: "ax.getDirection", insertText: "ax.getDirection()", documentation: "Gibt die Blickrichtung zurück." }
+            { label: "ax.getDirection", insertText: "ax.getDirection()", documentation: "Gibt die Blickrichtung zurück." },
+            { label: "ax.eat", insertText: "ax.eat()", documentation: "Isst einen Fisch." }
         ];
 
         const sugarFuncs = [
@@ -122,6 +121,7 @@ log(ax.position())`,
             { label: "position_x", insertText: "position_x()", documentation: "Gibt die x-Position zurück." },
             { label: "position_y", insertText: "position_y()", documentation: "Gibt die y-Position zurück." },
             { label: "direction", insertText: "direction()", documentation: "Gibt die Richtung zurück." },
+            { label: "eat", insertText: "eat()", documentation: "Alias für ax.eat()" },
 
             // deutsch
             { label: "bewegen", insertText: "bewegen(${1|" + directions.join(",") + "|})", documentation: "Deutsch: bewegen = ax.move()" },
@@ -129,6 +129,7 @@ log(ax.position())`,
             { label: "rechts_drehen", insertText: "rechts_drehen()", documentation: "Deutsch: rechts_drehen = ax.turn_right()" },
             { label: "richtung", insertText: "richtung()", documentation: "Deutsch: richtung = ax.getDirection()" },
             { label: "schritt", insertText: "schritt()", documentation: "Deutsch: schritt = ax.step()" },
+            { label: "essen", insertText: "essen()", documentation: "Deutsch: essen = ax.eat()" }
         ];
 
         const pythonSnippets = [
@@ -233,13 +234,15 @@ else:
                     "position_x": "position_x()\nGibt die x-Position zurück.",
                     "position_y": "position_y()\nGibt die y-Position zurück.",
                     "direction": "direction()\nGibt Blickrichtung zurück.",
+                    "eat": "eat()\nIsst einen Fisch.",
 
                     // deutsch
                     "bewegen": "bewegen(richtung)\nDeutsch: bewegen = ax.move()",
                     "links_drehen": "links_drehen()\nDeutsch: links_drehen = ax.turn_left()",
                     "rechts_drehen": "rechts_drehen()\nDeutsch: rechts_drehen = ax.turn_right()",
                     "richtung": "richtung()\nDeutsch: richtung = ax.getDirection()",
-                    "schritt": "schritt()\nDeutsch: schritt = ax.step()"
+                    "schritt": "schritt()\nDeutsch: schritt = ax.step()",
+                    "essen": "essen()\nDeutsch: Isst einen Fisch."
                 };
 
                 if (texts[w.word]) {
@@ -259,10 +262,14 @@ else:
 
     // Run Button
     document.getElementById("run").addEventListener("click", () => {
-        Game.api.reset();
         const code = monacoEditor.getValue();
         runPython(code);
     });
+
+    //reset Button
+    document.getElementById("reset").addEventListener("click", () => {
+    Game.api.reset();
+});
 });
 
 // =====================
@@ -293,6 +300,7 @@ position   = lambda: (ax.position().x, ax.position().y)
 position_x = lambda: ax.position().x
 position_y = lambda: ax.position().y
 direction  = ax.getDirection
+eat        = ax.eat
 
 # kurz
 pos   = position
@@ -306,11 +314,14 @@ links_drehen  = ax.turn_left
 rechts_drehen = ax.turn_right
 richtung      = ax.getDirection
 schritt       = ax.step
+essen         = ax.eat
+futter        = lambda: ax.get_food()
 
 ${code}
 `);
 
         appendLog("✓ Fertig");
+        Game.render();
     } catch (e) {
             appendLog("! Fehler: " + e);
         }

@@ -2,7 +2,7 @@ export class Renderer {
   constructor(scene, world) {
     this.scene = scene;
     this.world = world;
-    this.g = scene.add.graphics();
+    this.g = scene.add.graphics({ depth: -1 });
   }
 
   drawGrid() {
@@ -27,14 +27,18 @@ export class Renderer {
     }
   }
 
-  drawAxolotl(ax) {
-    const { tile } = this.world;
-    this.g.fillStyle(0xff77aa, 1);
-    this.g.fillRect(ax.x * tile + 8, ax.y * tile + 8, tile - 16, tile - 16);
+  
+  drawEntity(e) {
+    if (!e.sprite) return;
   }
 
-  drawAll(ax) {
+
+  drawAll(entities) {
     this.drawGrid();
-    this.drawAxolotl(ax);
+    
+    for (const e of entities) {
+            this.drawEntity(e);
+        }
+
   }
 }

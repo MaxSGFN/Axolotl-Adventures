@@ -29,6 +29,27 @@
       }
       canvas { display: block; }
       h2 { margin-top: 0; }
+      
+      .btn {
+          padding: 8px 14px;
+          background: #444;
+          color: white;
+          border: 1px solid #666;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 14px;
+          margin-right: 6px;
+          transition: background 0.15s ease, transform 0.1s ease;
+        }
+
+        .btn:hover {
+          background: #555;
+        }
+
+        .btn:active {
+          transform: scale(0.96);
+        }
+
     </style>
 
      <!-- Phaser -->
@@ -60,7 +81,9 @@
     <div>
       <h2>Python-Programm</h2>
       <div id="editor" style="width: 600px; height: 300px; border: 1px solid #555;"></div>
-      <button id="run" type="button">Ausführen</button>
+      <button id="run" class="btn" type="button">Ausführen</button>
+      <button id="reset" class="btn" type="button">Reset</button>
+
     </div>
 
   </body>

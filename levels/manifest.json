@@ -1,0 +1,18 @@
+{
+  "levels": [
+    {
+      "id": "level1",
+      "name": "PH",
+      "description": "PH",
+      "preview": "levels/previews/level1.png",
+      "file": "levels/level1.json"
+    },
+    {
+      "id": "level2",
+      "name": "PH",
+      "description": "PH",
+      "preview": "levels/previews/level2.png",
+      "file": "levels/level2.json"
+    }
+  ]
+}
