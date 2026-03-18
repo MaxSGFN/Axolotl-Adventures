@@ -5,6 +5,9 @@ export class Axolotl extends Entity {
     super(x, y, "Axo_south");  
     this.world = world;
 
+    this.SpawnX = x;
+    this.SpawnY = y;
+
     this.tags.add("player");
     this.solid = true;
     this.food = 0;
@@ -33,6 +36,11 @@ export class Axolotl extends Entity {
     Game.moveEntity(this, nx, ny);
   }
 
+  reset_position() {
+    this.x = this.SpawnX;
+    this.y = this.SpawnY;
+    this.direction = "south";
+  }
   eat() {
     let tx = this.x;
     let ty = this.y;

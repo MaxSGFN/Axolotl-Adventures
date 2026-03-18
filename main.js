@@ -288,6 +288,8 @@ async function runPython(code) {
 from js import Game, appendLog
 
 ax  = Game.ax
+ax.reset_position()
+
 log = appendLog
 print = appendLog
 
