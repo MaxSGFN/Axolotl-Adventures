@@ -211,4 +211,3 @@ export const Game = (() => {
 })();
 
 globalThis.Game = Game;
-Game.currentLevel = "levels/level2.json";

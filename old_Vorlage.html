@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lernfeld XX - Titel der Vorlage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = { 
+            darkMode: 'class', 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        darkbg: '#0a0c10', 
+                        cardbg: '#1e293b', 
+                        accent: '#fca5a5', // red-300
+                        accentHover: '#fecaca' // red-200
+                    } 
+                } 
+            } 
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #0a0c10; 
+            color: #f1f5f9; 
+            overflow-y: auto; 
+            scroll-behavior: smooth; 
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #450a0a; border-radius: 4px; }
+        
+        .bg-grid { background-image: radial-gradient(#2d0a0a 1px, transparent 1px); background-size: 40px 40px; background-attachment: fixed; }
+        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .nav-pill { @apply flex items-center justify-center px-4 py-3 rounded-lg font-bold text-xs uppercase tracking-widest transition-all border-2 cursor-pointer select-none shadow-md; }
+        .nav-pill-active { @apply bg-gradient-to-br from-red-200 to-red-500 text-red-950 border-red-300 shadow-lg shadow-red-500/20 transform scale-[1.02]; }
+        .nav-pill-inactive { @apply bg-slate-800 text-slate-400 border-slate-700 hover:bg-slate-700 hover:text-white hover:border-slate-500; }
+
+        .chapter-link { @apply block w-full text-left px-4 py-3 rounded-lg text-xs font-bold text-slate-400 border-l-2 border-transparent transition-all hover:text-white hover:bg-slate-800 cursor-pointer mb-1; }
+        .chapter-link.active { @apply bg-red-500/10 text-red-400 border-red-500; }
+
+        .wiki-content h1 { @apply text-3xl font-black text-red-200 mt-8 mb-6 pb-4 border-b border-slate-800 uppercase tracking-tight; }
+        .wiki-content h2 { @apply text-2xl font-bold text-red-400 mt-10 mb-4 border-b border-slate-600 uppercase tracking-tight; }
+        .wiki-content p { @apply mb-4 leading-relaxed text-slate-300 text-base; }
+
+        .smart-image { @apply relative block w-full h-64 rounded-2xl overflow-hidden border border-slate-800 hover:border-red-400/30 transition-all shadow-xl cursor-pointer; }
+    </style>
+</head>
+<body class="bg-grid">
+    
+    <nav class="sticky top-0 w-full z-50 glass border-b border-slate-800">
+        <div class="max-w-[95%] mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="bg-gradient-to-br from-red-200 to-red-500 p-2 rounded-xl shadow-lg">
+                    <i data-lucide="layout-template" class="w-5 h-5 text-red-950"></i>
+                </div>
+                <div>
+                    <h2 class="font-black text-lg tracking-tighter text-white uppercase italic leading-none">Fachinformatik</h2>
+                    <p class="text-[9px] text-red-400 font-bold tracking-[0.2em] uppercase mt-1">Lernportal</p>
+                </div>
+            </div>
+            <button onclick="window.location.href='index.html'" class="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-all border border-slate-700 px-4 py-2 rounded-lg hover:bg-slate-800">
+                Dashboard
+            </button>
+        </div>
+    </nav>
+
+    <main class="flex-1 p-6 max-w-[95%] mx-auto w-full">
+        <header class="mb-10 text-center md:text-left">
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-red-200 to-red-500 text-red-950 flex items-center justify-center shadow-2xl shadow-red-500/20 flex-shrink-0">
+                    <i data-lucide="file-code-2" class="w-10 h-10"></i>
+                </div>
+                <div>
+                    <span class="text-[10px] font-black text-red-400 uppercase tracking-[0.2em]">Lernfeld XX</span>
+                    <h1 class="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter leading-tight mt-1">Titel der Lerneinheit</h1>
+                </div>
+            </div>
+        </header>
+
+        <nav class="flex flex-col sm:grid sm:grid-cols-2 lg:flex lg:flex-row lg:items-stretch gap-5 mb-8">
+            <button id="btn-wissen" onclick="switchSection('wissen')" class="nav-pill nav-pill-active lg:flex-1">
+                <i data-lucide="book-open" class="w-4 h-4 mr-2"></i>Wissensdatenbank
+            </button>
+            <button id="btn-downloads" onclick="switchSection('downloads')" class="nav-pill nav-pill-inactive lg:flex-1">
+                <i data-lucide="cloud-download" class="w-4 h-4 mr-2"></i>Downloads
+            </button>
+            <button id="btn-uebung" onclick="switchSection('uebung')" class="nav-pill nav-pill-inactive lg:flex-1">
+                <i data-lucide="star" class="w-4 h-4 mr-2"></i>Übungen
+            </button>
+            <button id="btn-quiz" onclick="switchSection('quiz')" class="nav-pill nav-pill-inactive lg:flex-1">
+                <i data-lucide="lightbulb" class="w-4 h-4 mr-2"></i>Quiz
+            </button>
+            <button id="btn-game" onclick="switchSection('game')"
+                class="nav-pill nav-pill-inactive lg:flex-1">
+                <i data-lucide="gamepad-2" class="w-4 h-4 mr-2"></i>Game_Placeholder
+            </button>
+
+        </nav>
+
+        <div id="section-wissen" class="content-section flex flex-col lg:flex-row gap-10 items-start">
+            <aside class="w-full lg:w-1/4 lg:sticky lg:top-28 z-20">
+                <div class="glass border border-slate-800 rounded-2xl p-5 shadow-xl">
+                    <h3 class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4 px-2">Kapitel</h3>
+                    <nav id="chapter-nav" class="space-y-1 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+                        <div class="text-slate-500 text-xs italic p-2">Keine Inhalte...</div>
+                    </nav>
+                </div>
+            </aside>
+            <div class="w-full lg:w-3/4 glass border border-slate-800 rounded-[2rem] p-8 md:p-16 shadow-2xl min-h-[500px]">
+                <div id="wiki-container" class="wiki-content">
+                    <p class="text-slate-500 italic text-center py-20">Hier erscheint der Inhalt aus der JSON-Datei.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="section-downloads" class="content-section hidden animate-fade-in space-y-12">
+            <div class="glass border border-slate-800 rounded-2xl p-12 text-center">
+                <i data-lucide="folder-search" class="w-12 h-12 text-slate-700 mx-auto mb-4"></i>
+                <p class="text-slate-500 italic">Noch keine Downloads hinterlegt.</p>
+            </div>
+        </div>
+
+        <div id="section-uebung" class="content-section hidden animate-fade-in">
+             <div class="glass border border-slate-800 rounded-2xl p-12 text-center">
+                <i data-lucide="terminal" class="w-12 h-12 text-slate-700 mx-auto mb-4"></i>
+                <p class="text-slate-500 italic">Noch keine Übungen verfügbar.</p>
+            </div>
+        </div>
+
+        <div id="section-quiz" class="content-section hidden animate-fade-in text-center">
+             <div class="glass border border-slate-800 rounded-[2rem] p-12 max-w-xl mx-auto">
+                <i data-lucide="brain-circuit" class="w-12 h-12 text-red-400 mx-auto mb-6"></i>
+                <h2 class="text-2xl font-black mb-4 uppercase tracking-tight italic">Quiz wird vorbereitet</h2>
+            </div>
+        </div>
+
+        <div id="section-game"
+            class="content-section hidden animate-fade-in relative min-h-[80vh]"
+            style="background: url('sprites/placeholder.png') center/cover no-repeat;">
+
+            <button 
+                class="fixed left-1/2 -translate-x-1/2 bottom-6
+                    px-8 py-3 bg-red-500 hover:bg-red-400 text-red-950
+                    font-black rounded-xl uppercase tracking-wide shadow-lg
+                    transition-all z-40">
+                Start
+            </button>
+
+        </div>
+    </main>
+
+    <div id="image-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div id="modal-backdrop" class="absolute inset-0 cursor-pointer"></div>
+        <div class="relative z-10 w-full max-w-5xl flex flex-col gap-4">
+            <div class="flex justify-between items-center">
+                <h4 id="modal-title" class="text-white font-bold italic text-sm truncate">Vorschau</h4>
+                <button onclick="closeLightbox()" class="bg-slate-800 p-2 rounded-xl text-slate-400 hover:text-red-400 transition-all"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            <img id="modal-image" src="" class="hidden max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl scale-95 transition-transform duration-300 mx-auto">
+            <div id="pdf-container" class="hidden w-full h-[80vh] bg-slate-900 rounded-lg overflow-hidden border border-slate-700">
+                <iframe id="modal-pdf-viewer" src="" class="w-full h-full" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // PFADE ANPASSEN
+        const CONTENT_JSON_PATH = 'Json/LFXX_inhalt.json'; 
+
+        function switchSection(id) {
+            document.querySelectorAll('.content-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById('section-' + id).classList.remove('hidden');
+            document.querySelectorAll('.nav-pill').forEach(b => b.classList.replace('nav-pill-active', 'nav-pill-inactive'));
+            document.getElementById('btn-' + id).classList.replace('nav-pill-inactive', 'nav-pill-active');
+            lucide.createIcons();
+        }
+
+        function setupLightBox() {
+            document.addEventListener('click', e => {
+                const link = e.target.closest('.smart-image');
+                if (link) {
+                    e.preventDefault();
+                    const src = link.getAttribute('href');
+                    const isPDF = src.toLowerCase().endsWith('.pdf');
+                    const modal = document.getElementById('image-modal');
+                    const img = document.getElementById('modal-image');
+                    const pdfC = document.getElementById('pdf-container');
+                    const pdfV = document.getElementById('modal-pdf-viewer');
+
+                    if (isPDF) {
+                        img.classList.add('hidden');
+                        pdfC.classList.remove('hidden');
+                        pdfV.src = src;
+                    } else {
+                        pdfC.classList.add('hidden');
+                        img.src = src;
+                        img.classList.remove('hidden');
+                    }
+                    modal.classList.remove('hidden');
+                    setTimeout(() => modal.classList.remove('opacity-0'), 10);
+                }
+            });
+            document.getElementById('modal-backdrop').onclick = closeLightbox;
+        }
+
+        function closeLightbox() {
+            const m = document.getElementById('image-modal');
+            m.classList.add('opacity-0');
+            setTimeout(() => { m.classList.add('hidden'); document.getElementById('modal-pdf-viewer').src = ""; }, 300);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setupLightBox();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

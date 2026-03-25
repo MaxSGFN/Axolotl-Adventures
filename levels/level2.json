@@ -1,8 +1,8 @@
 {
   "size": 10,
   "player": {
-    "x": 5,
-    "y": 5,
+    "x": 4,
+    "y": 4,
     "direction": "south"
   },
 

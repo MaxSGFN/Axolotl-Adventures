@@ -13,6 +13,62 @@
       "description": "PH",
       "preview": "levels/previews/level2.png",
       "file": "levels/level2.json"
+    },
+    {
+      "id": "level3",
+      "name": "PH",
+      "description": "PH",
+      "preview": "levels/previews/level3.png",
+      "file": "levels/level3.json"
+    },
+    {
+      "id": "level4",
+      "name": "PH",
+      "description": "PH",
+      "preview": "levels/previews/level4.png",
+      "file": "levels/level4.json"
+    },
+    {
+      "id": "level5",
+      "name": "PH",
+      "description": "PH",
+      "preview": "levels/previews/level5.png",
+      "file": "levels/level5.json"
+    },
+    {
+      "id": "level6",
+      "name": "PH",
+      "description": "PH",
+      "preview": "levels/previews/level6.png",
+      "file": "levels/level6.json"
+    },
+    {
+      "id": "level7",
+      "name": "PH",
+      "description": "PH",
+      "preview": "levels/previews/level7.png",
+      "file": "levels/level7.json"
+    },
+    {
+      "id": "level8",
+      "name": "PH",
+      "description": "PH",
+      "preview": "levels/previews/level8.png",
+      "file": "levels/level8.json"
+    },
+    {
+      "id": "level9",
+      "name": "PH",
+      "description": "PH",
+      "preview": "levels/previews/level9.png",
+      "file": "levels/level9.json"
+    },
+    {
+      "id": "level10",
+      "name": "PH",
+      "description": "PH",
+      "preview": "levels/previews/level10.png",
+      "file": "levels/level10.json"
     }
   ]
 }

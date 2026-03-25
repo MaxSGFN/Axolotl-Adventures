@@ -1,12 +1,16 @@
 // =====================
-//  VARIABLEN
-// =====================
-const PYTHON_TICK_LIMIT = 500000;  // ~0.5 Mio operations
-
-// =====================
 //  IMPORTS (Engine)
 // =====================
 import { Game, GRID, TILE } from "./engine/Game.js";
+
+// =========================
+// LEVEL AUS URL LADEN
+// =========================
+const params = new URLSearchParams(window.location.search);
+const requestedLevel = params.get("level");
+if (requestedLevel) {
+    Game.currentLevel = requestedLevel;
+}
 
 // =====================
 //  UI / LOG
