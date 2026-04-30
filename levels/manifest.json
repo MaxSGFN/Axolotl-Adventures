@@ -2,22 +2,22 @@
   "levels": [
     {
       "id": "level1",
-      "name": "PH",
-      "description": "PH",
+      "name": "Level 1 Name",
+      "description": "Level 1 Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "preview": "levels/previews/level1.png",
       "file": "levels/level1.json"
     },
     {
       "id": "level2",
-      "name": "PH",
-      "description": "PH",
+      "name": "Level 2 Name",
+      "description": "Level 2 Description",
       "preview": "levels/previews/level2.png",
       "file": "levels/level2.json"
     },
     {
       "id": "level3",
-      "name": "PH",
-      "description": "PH",
+      "name": "Level 3 Name",
+      "description": "Level 3 Description",
       "preview": "levels/previews/level3.png",
       "file": "levels/level3.json"
     },

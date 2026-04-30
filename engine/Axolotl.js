@@ -80,6 +80,8 @@ export class Axolotl extends Entity {
       this.direction === "north" ? "west" :
       this.direction === "west"  ? "south" :
       this.direction === "south" ? "east"  : "north";
+
+      this.setSprite(this.spriteKeys[this.direction]);
   }
 
   turn_right() {
@@ -87,6 +89,8 @@ export class Axolotl extends Entity {
       this.direction === "north" ? "east"  :
       this.direction === "east"  ? "south" :
       this.direction === "south" ? "west"  : "north";
+
+      this.setSprite(this.spriteKeys[this.direction]);
   }
 
   getDirection() { return this.direction; }

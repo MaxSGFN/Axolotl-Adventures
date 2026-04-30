@@ -80,13 +80,13 @@
         <div class="glass rounded-2xl p-10 flex gap-10 imtems-start">
 
             <!-- ▶️ GRID MIT LEVEL BUTTONS -->
-            <div id="level-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
-                                        lg:grid-cols-4 xl:grid-cols-5 gap-6 flex-grow">
+            <div id="level-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
+                           gap-6 flex-grow">
             </div>
 
             <!-- ▶️ HOVER INFO PANEL -->
             <div id="level-info" 
-                 class="w-80 glass rounded-xl p-6 text-slate-300 hidden">
+                 class="w-80 glass rounded-xl p-6 text-slate-300" style="position: absolute; top: 0; right: 0; transition: transform 0.2s ease-out;">
                 <h2 class="text-xl font-bold text-red-300 mb-2" id="info-title"></h2>
                 <p id="info-desc" class="text-sm leading-relaxed"></p>
             </div>
@@ -103,7 +103,11 @@
 
         function loadLevels(levels) {
             const grid = document.getElementById("level-grid");
-            
+
+            // Standardtext beim Start
+            document.getElementById("info-title").textContent = "Level auswählen";
+            document.getElementById("info-desc").textContent = "Fahre mit der Maus über ein Level oder tippe darauf.";
+
             levels.forEach(level => {
                 const btn = document.createElement("div");
 
@@ -112,21 +116,16 @@
                     "cursor-pointer transition-transform hover:scale-105 shadow-lg";
 
                 btn.innerHTML = `
-                    <img src="${level.preview}" alt="${level.name}" class="w-full h-full object-cover">
+                    <img src="${level.preview}">
                 `;
 
-                // Hover-Info anzeigen
+                // Info-Panel aktualisieren (ohne ausblenden!)
                 btn.addEventListener("mouseenter", () => {
-                    document.getElementById("level-info").style.display = "block";
                     document.getElementById("info-title").textContent = level.name;
                     document.getElementById("info-desc").textContent = level.description;
                 });
 
-                btn.addEventListener("mouseleave", () => {
-                    document.getElementById("level-info").style.display = "none";
-                });
-
-                // Klick → Level laden
+                // Klick → Level starten
                 btn.addEventListener("click", () => {
                     window.location.href = `game.html?level=${level.file}`;
                 });
@@ -138,6 +137,14 @@
         document.addEventListener("DOMContentLoaded", () => {
             lucide.createIcons();
         });
+
+        
+        document.addEventListener("scroll", () => {
+            const info = document.getElementById("level-info");
+            const offset = window.scrollY + 20; // Abstand zum oberen Rand
+            info.style.transform = `translateY(${offset}px)`;
+        });
+
     </script>
 
 </body>
